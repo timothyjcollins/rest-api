@@ -199,7 +199,7 @@
 			return '{"SUCCESS" : "YES - ' . $cat_id . '"}';
 		}
 		protected function categories(){
-			$sql = "select category_text from Category";
+			$sql = "select category_text from innodb.Category";
 			$json = "{";
 			$result = mysql_query($sql);
 			while($row = mysql_fetch_array($sql)){
