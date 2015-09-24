@@ -1,5 +1,7 @@
 <?php
 	require_once 'api.class.php';
+	mysql_connect('userstories.clltdiskvizr.us-west-2.rds.amazonaws.com', 'tcollins', 'enif1233');
+    mysql_select_db('innodb');
 	class campaignapi extends api
 	{
 	    protected $User;
@@ -187,9 +189,13 @@
 		}
 		protected function newcategory(){
 		 	$name = $this->args["name"];
-			$sql = "insert into category (category_text) values ('" . $name . "')";
+			$sql = "select category_id from nnodb.Category order by category_id desc";
+			$result = mysql_query($sql);
+			$row = mysql_fetch_array($result);
+			$cat_id = $row["category_id"];
+			$sql = "insert into category (category_id,category_text) values (" . $cat_id . ",'" . $name . "')";
 			mysql_query($sql);
-			return '{"SUCCESS" : "YES"}';
+			return '{"SUCCESS" : "YES - ' . $cate_id . '"}';
 		}
 		protected function categories(){
 			$sql = "select category_text from category";
