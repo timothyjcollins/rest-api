@@ -193,9 +193,10 @@
 			$result = mysql_query($sql);
 			$row = mysql_fetch_array($result);
 			$cat_id = $row["category_id"];
-			$sql = "insert into category (category_id,category_text) values (" . $cat_id . ",'" . $name . "')";
+			$cat_id = $cat_id + 1;
+			$sql = "insert into category (category_id,category_text) values (1,'" . $name . "')";
 			mysql_query($sql);
-			return '{"SUCCESS" : "YES - ' . $cate_id . '"}';
+			return '{"SUCCESS" : "YES - ' . $cat_id . '"}';
 		}
 		protected function categories(){
 			$sql = "select category_text from category";
