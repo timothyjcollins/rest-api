@@ -208,7 +208,6 @@
 			$result = $link->query($sql);
 			while($row = $result->fetch_array()){
 				$json .= '"' . $row["category_text"] . '",';
-				$json .= '"test"';
 			}
 			$json = rtrim($json, ",");
 			$json .= "}";
