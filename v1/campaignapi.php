@@ -229,7 +229,17 @@
 			$camid = $this->args["camid"];
 			$keywords_arr = explode(",",$keywords);
 			
-			return '{"CAMPAIGN_ID" : "123"}';
+			$sql = "select * from innodb.Camapign where ";
+			
+			$sql .= "(";
+			foreach($keywords_arr as $keyword){
+				$sql .= " name like '%" . $keyword . "%' or ";
+				$sql .= " description like '%" . $keyword . "%' or ";
+			}
+			$sql = rtrim($sql, "or ");
+			$sql .= ")";
+			
+			return '{"CAMPAIGN_ID" : "' . $sql . '"}';
 		}
 		protected function delete_campaign(){
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
