@@ -362,6 +362,7 @@
 			return '{"SUCCESS" : "' . $story_id . '"}';
 		}
 		protected function summary_list_story(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$count = $this->args["count"];
 			$sort = $this->args["sort"];
 			$camid = $this->args["camid"];
@@ -400,7 +401,7 @@
 			}
 			$json = rtrim($json, ",");
 			$json .= "}";	
-		 	return $sql;;	
+		 	return $sql;;
 		}
 	}
 ?>
