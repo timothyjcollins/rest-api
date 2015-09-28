@@ -387,6 +387,7 @@
 				$order = "order by likes desc ";
 			}
 			$sql .= $order . " limit 0," . $count;
+			echo $sql;
 			$result = $link->query($sql);
 			
 			$json = "{";
@@ -401,7 +402,7 @@
 			}
 			$json = rtrim($json, ",");
 			$json .= "}";	
-		 	return $sql;;
+		 	return $json;
 		}
 	}
 ?>
