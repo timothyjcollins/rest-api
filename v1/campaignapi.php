@@ -400,7 +400,7 @@
 			}
 			$json = rtrim($json, ",");
 			$json .= "}";	
-		 	return $json;	
+		 	return $sql;;	
 		}
 	}
 ?>
