@@ -504,10 +504,16 @@
 			}
 			$sql = rtrim($sql, ", ");
 			$sql .= "where story_id = " . $story_id;
-			echo $sql;
 			$link->query($sql);
 										
 			return '{"SUCCESS" : "YES"}';
+		}
+		protected function delete_story(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
+			$story_id = $this->args["story_id"];
+			$sql = "update innodb.Story set deleted = 'YES' where story_id = " . $story_id;
+			$link->query($sql);
+		 	return '{"SUCCESS" : "YES"}';	
 		}
 	}
 ?>
