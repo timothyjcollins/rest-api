@@ -21,6 +21,7 @@
 			}
 		}
 		protected function submit(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$name = $this->args["name"];	
 			$desc = $this->args["desc"];
 			$cat = $this->args["cat"];
@@ -72,7 +73,7 @@
 					$text_allowed = "YES";
 				}
 			}
-			$sql = "insert into campaign (name,description,category_id,type_id,ctype_video_allowed,ctype_video_max,ctype_image_allowed,ctype_image_max,";
+			$sql = "insert into innodb.Campaign (name,description,category_id,type_id,ctype_video_allowed,ctype_video_max,ctype_image_allowed,ctype_image_max,";
 			$sql .= "ctype_image_resolution,ctype_text_allowed,ctype_text_max,start_date,end_date,isnameshown,iscapturing,ismoderated,state) values (";
 			$sql .= "'" . $name . "',";
 			$sql .= "'" . $desc . "',";
@@ -91,10 +92,13 @@
 			$sql .= "'" . $capturing . "',";
 			$sql .= "'" . $moderated . "',";
 			$sql .= "'" . $state . "')";
+			$link->query($sql);
+			$camid = mysqli_insert_id($link);
 			
-			return '{"CAMPAIGN_ID" : "123"}';
+			return '{"CAMPAIGN_ID" : "' . $camid . '"}';
 		}
 		protected function update(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$camid = $this->args["camid"];
 		 	$name = $this->args["name"];	
 			$desc = $this->args["desc"];
@@ -147,7 +151,7 @@
 					$text_allowed = "YES";
 				}
 			}
-			$sql = "update campaign ";
+			$sql = "update innodb.Campaign ";
 			$sql .= "set name = '" . $name . "',";
 			$sql .= "description = '" . $desc . "',"; 
 			$sql .= "category_id = '" . $cat . "',";
@@ -166,10 +170,13 @@
 			$sql .= "ismoderated = '" . $moderated . "',";
 			$sql .= "state = '" . $state . "' ";
 			$sql .= "where camapign_id = " . $camid;
+			$link->query($sql);
+			$camid = mysqli_insert_id($link);
 			
 			return '{"CAMPAIGN_ID" : "' . $camid . '"}';
 		}
 		protected function search(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$keywords = $this->args["keywords"];
 			$filter = $this->args["filter"];
 			$num_per_page = $this->args["num_per_page"];
@@ -180,9 +187,10 @@
 			return '{"CAMPAIGN_ID" : "123"}';
 		}
 		protected function delete(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$camid = $this->args["camid"];
-		 	$sql = "delete from camapign where campaign_id = " . $camid;
-			mysql_query($sql);
+		 	$sql = "upadte innodb.Campaign set deleted = 'YES' where campaign_id = " . $camid;
+			$link->query($sql);
 			return '{"SUCCESS" : "YES"}';
 		}
 		protected function newcategory(){
@@ -194,13 +202,13 @@
 			return '{"SUCCESS" : "YES - ' . $cat_id . '"}';
 		}
 		protected function categories(){
-			mysql_connect('userstories.clltdiskvizr.us-west-2.rds.amazonaws.com', 'tcollins', 'enif1233');
-		    mysql_select_db('innodb');
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$sql = "select category_text from innodb.Category";
 			$json = "{";
 			$result = $link->query($sql);
 			while($row = $result->fetch_array()){
 				$json .= '"' . $row["category_text"] . '",';
+				$json .= '"test"';
 			}
 			$json = rtrim($json, ",");
 			$json .= "}";
