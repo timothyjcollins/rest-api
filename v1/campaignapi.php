@@ -367,7 +367,7 @@
 			$sort = $this->args["sort"];
 			$camid = $this->args["camid"];
 			
-			$sql = "select * from innodb.Story where campaign_id = " . $camid . " ";
+			$sql = "select * from innodb.Story where not deleted = 'YES' and campaign_id = " . $camid . " ";
 			if($sort == "ALPHA_ASC"){
 				$order = "order by title asc ";
 			}
