@@ -503,6 +503,7 @@
 				$sql .= "title = '" . $title . "', ";	
 			}
 			$sql = rtrim($sql, ",");
+			$sql .= "where story_id = " . $story_id;
 			$link->query($sql);
 										
 			return '{"SUCCESS" : "YES"}';
