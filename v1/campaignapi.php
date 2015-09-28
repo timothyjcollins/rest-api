@@ -367,7 +367,7 @@
 			$sort = $this->args["sort"];
 			$camid = $this->args["camid"];
 			
-			$sql = "select * from innodb.Story where not deleted = 'YES' and campaign_id = " . $camid . " ";
+			$sql = "select * from innodb.Story where not deleted = 'YES' and isapproved = 'YES' and campaign_id = " . $camid . " ";
 			if($sort == "ALPHA_ASC"){
 				$order = "order by title asc ";
 			}
@@ -428,7 +428,8 @@
 			$json .= '"PUBLISHED_AT" : "' . $row["published_at"] . '",';
 			$json .= '"ISFLAGGED" : "' . $row["isflagged"] . '",';
 			$json .= '"LIKES" : "' . $row["likes"] . '",';
-			$json .= '"EMAIL" : "' . $row["email"] . '"';
+			$json .= '"EMAIL" : "' . $row["email"] . '",';
+			$json .= '"DELETED" : "' . $row["deleted"] . '"';
 			$json .= "]";
 			$json .= "}";	
 		 	return $json;
@@ -455,6 +456,7 @@
 			$pub_at = $this->args["pub_at"];
 			$flagged = $this->args["flagged"];
 			$likes = $this->args["likes"];
+			$deleted = $this->args["deleted"];
 			
 			$sql = "update innodb.Story set ";
 			if($title != ""){
@@ -502,6 +504,9 @@
 			if($likes != ""){
 				$sql .= "title = '" . $likes . "', ";	
 			}
+			if($deleted != ""){
+				$sql .= "deleted = '" . $deleted . "', ";	
+			}
 			$sql = rtrim($sql, ", ");
 			$sql .= "where story_id = " . $story_id;
 			$link->query($sql);
@@ -514,6 +519,24 @@
 			$sql = "update innodb.Story set deleted = 'YES' where story_id = " . $story_id;
 			$link->query($sql);
 		 	return '{"SUCCESS" : "YES"}';	
+		}
+		protected function approve_story(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
+			$story_id = $this->args["story_id"];
+			$sql = "update innodb.Story set isapproved = 'YES' where story_id = " . $story_id;
+			$link->query($sql);
+			
+			return '{"SUCCESS" : "YES"}';
+		}
+		protected function disapprove_story(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
+			$story_id = $this->args["story_id"];
+			$sql = "update innodb.Story set isapproved = 'NO' where story_id = " . $story_id;
+			$link->query($sql);
+
+			$story_id = $this->args["story_id"];
+			
+			return '{"SUCCESS" : "YES"}';
 		}
 	}
 ?>
