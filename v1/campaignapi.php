@@ -337,7 +337,6 @@
 			$sql .= "'" . $flagged . "',";
 			$sql .= "'" . $likes . "')";
 			$link->query($sql);
-			echo $sql;
 			$story_id = mysqli_insert_id($link);
 			
 			if($video != ""){
@@ -361,6 +360,47 @@
 			$link->query($sql);
 											
 			return '{"SUCCESS" : "' . $story_id . '"}';
+		}
+		protected function summary_list_story(){
+			$count = $this->args["count"];
+			$sort = $this->args["sort"];
+			$camid = $this->args["camid"];
+			
+			$sql = "select * from innodb.Story where campaign_id = " . $camid . " ";
+			if($sort == "ALPHA_ASC"){
+				$order = "order by name asc ";
+			}
+			if($sort == "ALPHA_DESC"){
+				$order = "order by name desc ";
+			}
+			if($sort == "DATE_ASC"){
+				$order = "order by submitted_at asc ";
+			}
+			if($sort == "DATE_DESC"){
+				$order = "order by submited_at desc ";
+			}
+			if($sort == "LIKES_ASC"){
+				$order = "order by likes asc ";
+			}
+			if($sort == "LIKES_DESC"){
+				$order = "order by likes desc ";
+			}
+			$sql .= $order . " limit 0," . $count;
+			$result = $link->query($sql);
+			
+			$json = "{";
+			while($row = $result->fetch_array()){
+				$json .= '"STORY_ID" : "' . $row["story_id"];
+				$json .= "[";
+				$json .= '"TITLE" : "' . $row["title"] . '",';
+				$json .= '"DESCRIPTION" : "' . $row["description"] . '",';
+				$json .= '"FIRST_NAME" : "' . $row["first_name"] . '",';
+				$json .= '"LAST_NAME" : "' . $row["last_name"] . '"';
+				$json .= "],";
+			}
+			$json = rtrim($json, ",");
+			$json .= "}";	
+		 	return $json;	
 		}
 	}
 ?>
