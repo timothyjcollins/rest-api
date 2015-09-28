@@ -218,7 +218,7 @@
 			$sql .= "where camapign_id = " . $camid;
 			$link->query($sql);
 			
-			return '{"CAMPAIGN_ID" : "' . $camid . '"}';
+			return '{"CAMPAIGN_ID" : "' . $sql . '"}';
 		}
 		protected function search_campaign(){
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
