@@ -229,7 +229,7 @@
 			$camid = $this->args["camid"];
 			$keywords_arr = explode(",",$keywords);
 			
-			$sql = "select * from innodb.Camapign where ";
+			$sql = "select * from innodb.Campaign where ";
 			
 			$sql .= "(";
 			foreach($keywords_arr as $keyword){
