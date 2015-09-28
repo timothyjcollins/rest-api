@@ -215,10 +215,10 @@
 				$sql .= "state = '" . $state . "' ";
 			}
 			$sql = rtrim($sql, ",");
-			$sql .= "where camapign_id = " . $camid;
+			$sql .= " where campaign_id = " . $camid;
 			$link->query($sql);
 			
-			return '{"CAMPAIGN_ID" : "' . $sql . '"}';
+			return '{"CAMPAIGN_ID" : "' . $camid . '"}';
 		}
 		protected function search_campaign(){
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
