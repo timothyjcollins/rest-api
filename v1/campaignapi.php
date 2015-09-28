@@ -433,5 +433,79 @@
 			$json .= "}";	
 		 	return $json;
 		}
+		protected function update_story(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
+			$story_id = $this->args["story_id"];
+			$camid = $this->args["camid"];
+			$title = $this->args["title"];
+			$desc = $this->args["desc"];
+			$video = $this->args["video"];
+			$image = $this->args["image"];
+			$text = $this->args["text"];
+			$fname = $this->args["fname"];
+			$lname = $this->args["lname"];
+			$address1 = $this->args["address1"];
+			$address2 = $this->args["address2"];
+			$country = $this->args["country"];
+			$city = $this->args["city"];
+			$email = $this->args["email"];
+			$optin = $this->args["optin"];
+			$state = $this->args["state"];
+			$sub_at = $this->args["sub_at"];
+			$pub_at = $this->args["pub_at"];
+			$flagged = $this->args["flagged"];
+			$likes = $this->args["likes"];
+			
+			$sql = "update innodb.Story set ";
+			if($title != ""){
+				$sql .= "title = '" . $title . "', ";	
+			}
+			if($desc != ""){
+				$sql .= "description = '" . $desc . "', ";	
+			}
+			if($fname != ""){
+				$sql .= "first_name = '" . $fname . "', ";	
+			}
+			if($lname != ""){
+				$sql .= "last_name = '" . $lname . "', ";	
+			}
+			if($address1 != ""){
+				$sql .= "address_1 = '" . $address1 . "', ";	
+			}
+			if($address2 != ""){
+				$sql .= "address_2 = '" . $title . "', ";	
+			}
+			if($country != ""){
+				$sql .= "country_id = '" . $title . "', ";	
+			}
+			if($city != ""){
+				$sql .= "city = '" . $title . "', ";	
+			}
+			if($email != ""){
+				$sql .= "email = '" . $title . "', ";	
+			}
+			if($optin != ""){
+				$sql .= "optin = '" . $title . "', ";	
+			}
+			if($state != ""){
+				$sql .= "state_id = '" . $title . "', ";	
+			}
+			if($pub_at != ""){
+				$sql .= "published_at = '" . $title . "', ";	
+			}
+			if($sub_at != ""){
+				$sql .= "submitted_at = '" . $title . "', ";	
+			}
+			if($flagged != ""){
+				$sql .= "isflagged = '" . $title . "', ";	
+			}
+			if($likes != ""){
+				$sql .= "title = '" . $title . "', ";	
+			}
+			$sql = rtrim($sql, ",");
+			$link->query($sql);
+										
+			return '{"SUCCESS" : "YES"}';
+		}
 	}
 ?>
