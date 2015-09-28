@@ -279,6 +279,7 @@
 		 	return $json;	
 		}
 		protected function submit_story(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$camid = $this->args["camid"];
 			$title = $this->args["title"];
 			$desc = $this->args["desc"];
