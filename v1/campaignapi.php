@@ -337,6 +337,7 @@
 			$sql = "'" . $flagged . "',";
 			$sql = "'" . $likes . "')";
 			$link->query($sql);
+			echo $sql;
 			$story_id = mysqli_insert_id($link);
 			
 			if($video != ""){
