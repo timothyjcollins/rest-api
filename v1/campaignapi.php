@@ -239,7 +239,17 @@
 			$sql = rtrim($sql, "or ");
 			$sql .= ")";
 			
-			return '{"CAMPAIGN_ID" : "' . $sql . '"}';
+			$result = $link->query($sql);
+			$json = "{";
+			while($row = $result->fetch_array()){
+				$json .= '"CAMPAIGN_ID" : "' . $row["campaign_id"] . '", "VALUES" : [';
+				$json .= '"NAME" : "' . $row["name"] . '",';
+				$json .= '"DESCRIPTION" : "' . $row["description"] . '"';
+				$json .= ']';
+			}
+			$json .= "}";
+			
+			return '{"CAMPAIGN_ID" : "' . $json . '"}';
 		}
 		protected function delete_campaign(){
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
