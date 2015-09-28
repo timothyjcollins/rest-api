@@ -387,7 +387,6 @@
 				$order = "order by likes desc ";
 			}
 			$sql .= $order . " limit 0," . $count;
-			echo $sql;
 			$result = $link->query($sql);
 			
 			$json = "{";
@@ -401,6 +400,36 @@
 				$json .= "],";
 			}
 			$json = rtrim($json, ",");
+			$json .= "}";	
+		 	return $json;
+		}
+		protected function retrieve_story(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
+			$story_id = $this->args["story_id"];
+			
+			$sql = "select * from innodb.Story where story_id = " . $camid . " ";
+			$result = $link->query($sql);
+			$row = $result->fetch_array();
+			
+			$json = "{";
+			$json .= '"STORY_ID" : "' . $row["story_id"];
+			$json .= "[";
+			$json .= '"TITLE" : "' . $row["title"] . '",';
+			$json .= '"DESCRIPTION" : "' . $row["description"] . '",';
+			$json .= '"FIRST_NAME" : "' . $row["first_name"] . '",';
+			$json .= '"LAST_NAME" : "' . $row["last_name"] . '",';
+			$json .= '"ADDRESS_1" : "' . $row["address_1"] . '",';
+			$json .= '"ADDRESS_2" : "' . $row["address_2"] . '",';
+			$json .= '"COUNTRY" : "' . $row["country"] . '",';
+			$json .= '"CITY" : "' . $row["city"] . '",';
+			$json .= '"OPTIN" : "' . $row["optin"] . '",';
+			$json .= '"STATE" : "' . $row["state"] . '",';
+			$json .= '"SUBMITTED_AT" : "' . $row["submitted_at"] . '",';
+			$json .= '"PUBLISHED_AT" : "' . $row["published_at"] . '",';
+			$json .= '"ISFLAGGED" : "' . $row["isflagged"] . '",';
+			$json .= '"LIKES" : "' . $row["likes"] . '",';
+			$json .= '"EMAIL" : "' . $row["email"] . '"';
+			$json .= "]";
 			$json .= "}";	
 		 	return $json;
 		}
