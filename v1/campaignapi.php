@@ -207,7 +207,7 @@
 				$json .= '"' . $row["category_text"] . '",';
 			}
 			$json = rtrim($json, ",");
-			$json .= "}";
+			$json .= "TEST}";
 		 	return $json;	
 		}
 	}
