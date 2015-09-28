@@ -473,34 +473,34 @@
 				$sql .= "address_1 = '" . $address1 . "', ";	
 			}
 			if($address2 != ""){
-				$sql .= "address_2 = '" . $title . "', ";	
+				$sql .= "address_2 = '" . $address2 . "', ";	
 			}
 			if($country != ""){
-				$sql .= "country_id = '" . $title . "', ";	
+				$sql .= "country_id = '" . $country . "', ";	
 			}
 			if($city != ""){
-				$sql .= "city = '" . $title . "', ";	
+				$sql .= "city = '" . $city . "', ";	
 			}
 			if($email != ""){
-				$sql .= "email = '" . $title . "', ";	
+				$sql .= "email = '" . $email . "', ";	
 			}
 			if($optin != ""){
-				$sql .= "optin = '" . $title . "', ";	
+				$sql .= "optin = '" . $optin . "', ";	
 			}
 			if($state != ""){
-				$sql .= "state_id = '" . $title . "', ";	
+				$sql .= "state_id = '" . $state . "', ";	
 			}
 			if($pub_at != ""){
-				$sql .= "published_at = '" . $title . "', ";	
+				$sql .= "published_at = '" . $pub_at . "', ";	
 			}
 			if($sub_at != ""){
-				$sql .= "submitted_at = '" . $title . "', ";	
+				$sql .= "submitted_at = '" . $sub_at . "', ";	
 			}
 			if($flagged != ""){
-				$sql .= "isflagged = '" . $title . "', ";	
+				$sql .= "isflagged = '" . $flagged . "', ";	
 			}
 			if($likes != ""){
-				$sql .= "title = '" . $title . "', ";	
+				$sql .= "title = '" . $likes . "', ";	
 			}
 			$sql = rtrim($sql, ", ");
 			$sql .= "where story_id = " . $story_id;
