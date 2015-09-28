@@ -1,7 +1,5 @@
 <?php
 	require_once 'api.class.php';
-	mysql_connect('userstories.clltdiskvizr.us-west-2.rds.amazonaws.com', 'tcollins', 'enif1233');
-    mysql_select_db('innodb');
 	class campaignapi extends api
 	{
 	    protected $User;
@@ -188,17 +186,17 @@
 			return '{"SUCCESS" : "YES"}';
 		}
 		protected function newcategory(){
+			mysql_connect('userstories.clltdiskvizr.us-west-2.rds.amazonaws.com', 'tcollins', 'enif1233');
+		    mysql_select_db('innodb');
 		 	$name = $this->args["name"];
-			$sql = "select category_id from nnodb.Category order by category_id desc";
+			$sql = "insert into innodb.category (category_text) values ('" . $name . "')";
 			$result = mysql_query($sql);
-			$row = mysql_fetch_array($result);
-			$cat_id = $row["category_id"];
-			$cat_id = $cat_id + 1;
-			$sql = "insert into category (category_id,category_text) values (1,'" . $name . "')";
-			mysql_query($sql);
+			$cat_id = mysql_insert_id();
 			return '{"SUCCESS" : "YES - ' . $cat_id . '"}';
 		}
 		protected function categories(){
+			mysql_connect('userstories.clltdiskvizr.us-west-2.rds.amazonaws.com', 'tcollins', 'enif1233');
+		    mysql_select_db('innodb');
 			$sql = "select category_text from innodb.Category";
 			$json = "{";
 			$result = mysql_query($sql);
@@ -207,7 +205,7 @@
 				$json .= '"' . $row["category_text"] . '",';
 			}
 			$json = rtrim($json, ",");
-			$json .= "TEST}";
+			$json .= "}";
 		 	return $json;	
 		}
 	}

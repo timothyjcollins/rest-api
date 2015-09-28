@@ -6,7 +6,6 @@
 	}
 	
 	try {
-		echo $_REQUEST['request'];	
 	    $API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_SERVER["QUERY_STRING"]);
 	    echo $API->processAPI();
 	} catch (Exception $e) {
