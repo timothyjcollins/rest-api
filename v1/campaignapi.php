@@ -20,7 +20,7 @@
 				throw new Exception('No or Bad API Key provided');
 			}
 		}
-		protected function submit(){
+		protected function submit_campaign(){
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$name = $this->args["name"];	
 			$desc = $this->args["desc"];
@@ -97,7 +97,7 @@
 			
 			return '{"CAMPAIGN_ID" : "' . $camid . '"}';
 		}
-		protected function update(){
+		protected function update_campaign(){
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$camid = $this->args["camid"];
 		 	$name = $this->args["name"];	
@@ -152,30 +152,64 @@
 				}
 			}
 			$sql = "update innodb.Campaign ";
-			$sql .= "set name = '" . $name . "',";
-			$sql .= "description = '" . $desc . "',"; 
-			$sql .= "category_id = '" . $cat . "',";
-			$sql .= "type_id = '" . $type . "',";
-			$sql .= "ctype_video_allowed = '" . $video_allowed . "',";
-			$sql .= "ctype_video_max = '" . $video_max_num . "',";
-			$sql .= "ctype_image_allowed = '" . $image_allowed . "',";
-			$sql .= "ctype_image_max = '" . $image_max_num . "',";
-			$sql .= "ctype_image_resolution = '" . $image_max_size . "',";
-			$sql .= "ctype_text_allowed = '" . $text_allowed . "',";
-			$sql .= "ctype_text_max = '" . $text_max_size . "',";
-			$sql .= "start_date = '" . $start . "',";
-			$sql .= "end_date = '" . $end . "',";
-			$sql .= "isnameshown = '" . $nameshown . "',";
-			$sql .= "iscapturing = '" . $capturing . "',";
-			$sql .= "ismoderated = '" . $moderated . "',";
-			$sql .= "state = '" . $state . "' ";
+			$sql .= "set ";
+			if($name != ""){
+				$sql .= "name = '" . $name . "',";
+			}
+			if($desc != ""){
+				$sql .= "description = '" . $desc . "',"; 
+			}
+			if($cat != ""){
+				$sql .= "category_id = '" . $cat . "',";
+			}
+			if($type != ""){
+				$sql .= "type_id = '" . $type . "',";
+			}
+			if($video_allowed != ""){
+				$sql .= "ctype_video_allowed = '" . $video_allowed . "',";
+			}
+			if($video_max_num != ""){
+				$sql .= "ctype_video_max = '" . $video_max_num . "',";
+			}
+			if($image_allowed != ""){
+				$sql .= "ctype_image_allowed = '" . $image_allowed . "',";
+			}
+			if($image_max_num != ""){
+				$sql .= "ctype_image_max = '" . $image_max_num . "',";
+			}
+			if($image_max_size != ""){
+				$sql .= "ctype_image_resolution = '" . $image_max_size . "',";
+			}
+			if($text_allowed != ""){
+				$sql .= "ctype_text_allowed = '" . $text_allowed . "',";
+			}
+			if($text_max_size != ""){
+				$sql .= "ctype_text_max = '" . $text_max_size . "',";
+			}
+			if($start != ""){
+				$sql .= "start_date = '" . $start . "',";
+			}
+			if($end != ""){
+				$sql .= "end_date = '" . $end . "',";
+			}
+			if($nameshown != ""){
+				$sql .= "isnameshown = '" . $nameshown . "',";
+			}
+			if($capturing != ""){
+				$sql .= "iscapturing = '" . $capturing . "',";
+			}
+			if($moderated != ""){
+				$sql .= "ismoderated = '" . $moderated . "',";
+			}
+			if($state != ""){
+				$sql .= "state = '" . $state . "' ";
+			}
 			$sql .= "where camapign_id = " . $camid;
 			$link->query($sql);
-			$camid = mysqli_insert_id($link);
 			
 			return '{"CAMPAIGN_ID" : "' . $camid . '"}';
 		}
-		protected function search(){
+		protected function search_campaign(){
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$keywords = $this->args["keywords"];
 			$filter = $this->args["filter"];
@@ -186,7 +220,7 @@
 			
 			return '{"CAMPAIGN_ID" : "123"}';
 		}
-		protected function delete(){
+		protected function delete_campaign(){
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$camid = $this->args["camid"];
 		 	$sql = "upadte innodb.Campaign set deleted = 'YES' where campaign_id = " . $camid;
