@@ -278,5 +278,87 @@
 			$json .= "}";
 		 	return $json;	
 		}
+		protected function submit_story(){
+			$camid = $this->args["camid"];
+			$title = $this->args["title"];
+			$desc = $this->args["desc"];
+			$video = $this->args["video"];
+			$image = $this->args["image"];
+			$text = $this->args["text"];
+			$fname = $this->args["fname"];
+			$lname = $this->args["lname"];
+			$address1 = $this->args["address1"];
+			$address2 = $this->args["address2"];
+			$country = $this->args["country"];
+			$city = $this->args["city"];
+			$email = $this->args["email"];
+			$optin = $this->args["optin"];
+			$state = $this->args["state"];
+			$sub_at = $this->args["sub_at"];
+			$pub_at = $this->args["pub_at"];
+			$flagged = $this->args["flagged"];
+			$moderated = $this->args["moderated"];
+			$nameshown = $this->args["nameshown"];
+			$capturing = $this->args["capturing"];
+			$likes = $this->args["likes"];
+			if($video != ""){
+				$video_arr = explode("[",$video);
+				$video_arr2 = explode(",",$video_arr[1]);
+				$video_title = $video_arr2[0];
+				$video_caption = $video_arr2[1];
+				$video_arr3 = explode("]", $video_arr2[2]);
+				$video_link = $video_arr3[0];
+			}			
+			if($image != ""){
+				$image_arr = explode("[",$video);
+				$image_arr2 = explode(",",$video_arr[1]);
+				$image_caption = $video_arr2[0];
+				$image_arr3 = explode("]", $image_arr2[2]);
+				$image_link = $image_arr3[0];
+			}			
+			
+			$sql = "insert into innodb.Story (campaign_id,title,description,first_name,last_name,address_1,address_2,country_id,city,email,optin,";
+			$sql .= "state_id,submitted_at,published_at,isflagged,likes) values (";
+			$sql .= $camid . ",";
+			$sql = "'" . $title . "',";
+			$sql = "'" . $desc . "',";
+			$sql = "'" . $fname . "',";
+			$sql = "'" . $lname . "',";
+			$sql = "'" . $address1 . "',";
+			$sql = "'" . $address2 . "',";
+			$sql = "'" . $country . "',";
+			$sql = "'" . $city . "',";
+			$sql = "'" . $email . "',";
+			$sql = "'" . $optin . "',";
+			$sql = "'" . $state . "',";
+			$sql = "'" . $sub_at . "',";
+			$sql = "'" . $pub_at . "',";
+			$sql = "'" . $flagged . "',";
+			$sql = "'" . $likes . "')";
+			$link->query($sql);
+			$story_id = mysqli_insert_id($link);
+			
+			if($video != ""){
+				$sql = "insert into innodb.Story_video (story_id,title,caption,link) values (";
+				$sql .= $story_id . ",";
+				$sql .= "'" . $video_title . "',";
+				$sql .= "'" . $video_caption . "',";
+				$sql .= "'" . $video_link . "')";
+				$link->query($sql);
+			}
+			if($image != ""){
+				$sql = "insert into innodb.Story_image (story_id,content) values (";
+				$sql .= $story_id . ",";
+				$sql .= "'" . $image_caption . "',";
+				$sql .= "'" . $image_link . "')";
+				$link->query($sql);
+			}
+			$sql = "insert into innodb.Story_text (story_id,content) values (";
+			$sql .= $story_id . "," ;
+			$sql .= "'" . $text . "')";
+			$link->query($sql);
+											
+			return '{"SUCCESS" : "' . $story_id . '"}';
+		}
 	}
 ?>
