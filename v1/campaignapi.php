@@ -198,9 +198,8 @@
 		    mysql_select_db('innodb');
 			$sql = "select category_text from innodb.Category";
 			$json = "{";
-			$result = mysql_query($sql);
-			$json .= '"cat",';
-			while($row = mysql_fetch_array($sql)){
+			$result = $link->query($sql);
+			while($row = $result->fetch_array()){
 				$json .= '"' . $row["category_text"] . '",';
 			}
 			$json = rtrim($json, ",");
