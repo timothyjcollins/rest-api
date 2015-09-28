@@ -111,44 +111,54 @@
 			$capturing = $this->args["capturing"];
 			$moderated = $this->args["moderated"];
 			$state = $this->args["state"];
-			if($nameshown != "YES" and $namesown != "NO"){
-				return '{"CAMPAIGN_ID" : "ERROR NAMESHOWN SET INCORRECTLY"}';
-			}
-			if($capturing != "YES" and $capturing != "NO"){
-				return '{"CAMPAIGN_ID" : "ERROR CAPTURING SET INCORRECTLY"}';
-			}
-			if($moderated != "YES" and $moderated != "NO"){
-				return '{"CAMPAIGN_ID" : "ERROR MODERATED SET INCORRECTLY"}';
-			}
-			if($state != "PENDING" and $state != "PUBLISHED" and $state != "INACTIVE"){
-				return '{"CAMPAIGN_ID" : "ERROR STATE SET INCORRECTLY"}';
-			}
-			$ctypes_arr = explode(",",$ctypes);
-			$video_allowed = "NO";
-			$image_allowed = "NO";
-			$text_allowed = "NO";
-			$video_max_num = 0;
-			$image_max_num = 0;
-			$image_max_size = 0;
-			$text_max_num = 0;
-			foreach($ctypes_arr as $ctype){
-				$ctype_arr = explode("[",$ctype);
-				if($ctype_arr[0] == "video"){
-					$video_max_num_arr = explode("]",$ctype_arr[1]);
-					$video_max_num = $video_max_num_arr[0];
-					$video_allowed = "YES";
+			if($nameshown != ""){
+				if($nameshown != "YES" and $namesown != "NO"){
+					return '{"CAMPAIGN_ID" : "ERROR NAMESHOWN SET INCORRECTLY"}';
 				}
-				if($ctype_arr[0] == "image"){
-					$image_max_num_arr = explode(",",$ctype_arr[1]);
-					$image_max_num = $image_max_num_arr[0];
-					$image_max_size_arr = explode("]",$image_max_num_arr[1]);
-					$image_max_size = $image_max_size_arr[0];
-					$image_allowed = "YES";
+			}
+			if($capturing != ""){
+				if($capturing != "YES" and $capturing != "NO"){
+					return '{"CAMPAIGN_ID" : "ERROR CAPTURING SET INCORRECTLY"}';
 				}
-				if($ctype_arr[0] == "text"){
-					$text_max_num_arr = explode("]",$ctype_arr[1]);
-					$text_max_num = $text_max_num_arr[0];
-					$text_allowed = "YES";
+			}
+			if($moderated != ""){
+				if($moderated != "YES" and $moderated != "NO"){
+					return '{"CAMPAIGN_ID" : "ERROR MODERATED SET INCORRECTLY"}';
+				}
+			}
+			if($state != ""){
+				if($state != "PENDING" and $state != "PUBLISHED" and $state != "INACTIVE"){
+					return '{"CAMPAIGN_ID" : "ERROR STATE SET INCORRECTLY"}';
+				}
+			}
+			if($ctypes != ""){
+				$ctypes_arr = explode(",",$ctypes);
+				$video_allowed = "NO";
+				$image_allowed = "NO";
+				$text_allowed = "NO";
+				$video_max_num = 0;
+				$image_max_num = 0;
+				$image_max_size = 0;
+				$text_max_num = 0;
+				foreach($ctypes_arr as $ctype){
+					$ctype_arr = explode("[",$ctype);
+					if($ctype_arr[0] == "video"){
+						$video_max_num_arr = explode("]",$ctype_arr[1]);
+						$video_max_num = $video_max_num_arr[0];
+						$video_allowed = "YES";
+					}
+					if($ctype_arr[0] == "image"){
+						$image_max_num_arr = explode(",",$ctype_arr[1]);
+						$image_max_num = $image_max_num_arr[0];
+						$image_max_size_arr = explode("]",$image_max_num_arr[1]);
+						$image_max_size = $image_max_size_arr[0];
+						$image_allowed = "YES";
+					}
+					if($ctype_arr[0] == "text"){
+						$text_max_num_arr = explode("]",$ctype_arr[1]);
+						$text_max_num = $text_max_num_arr[0];
+						$text_allowed = "YES";
+					}
 				}
 			}
 			$sql = "update innodb.Campaign ";
