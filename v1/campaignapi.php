@@ -186,12 +186,11 @@
 			return '{"SUCCESS" : "YES"}';
 		}
 		protected function newcategory(){
-			mysql_connect('userstories.clltdiskvizr.us-west-2.rds.amazonaws.com', 'tcollins', 'enif1233');
-		    mysql_select_db('innodb');
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$name = $this->args["name"];
-			$sql = "insert into innodb.category (category_text) values ('" . $name . "')";
-			$result = mysql_query($sql);
-			$cat_id = mysql_insert_id();
+			$sql = "insert into innodb.Category (category_text) values ('" . $name . "')";
+			$link->query($sql);
+			$cat_id = mysqli_insert_id($link);
 			return '{"SUCCESS" : "YES - ' . $cat_id . '"}';
 		}
 		protected function categories(){
