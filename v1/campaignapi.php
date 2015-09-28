@@ -369,10 +369,10 @@
 			
 			$sql = "select * from innodb.Story where campaign_id = " . $camid . " ";
 			if($sort == "ALPHA_ASC"){
-				$order = "order by name asc ";
+				$order = "order by title asc ";
 			}
 			if($sort == "ALPHA_DESC"){
-				$order = "order by name desc ";
+				$order = "order by title desc ";
 			}
 			if($sort == "DATE_ASC"){
 				$order = "order by submitted_at asc ";
