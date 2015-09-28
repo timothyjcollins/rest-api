@@ -407,7 +407,7 @@
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$story_id = $this->args["story_id"];
 			
-			$sql = "select * from innodb.Story where story_id = " . $camid . " ";
+			$sql = "select * from innodb.Story where story_id = " . $story_id;
 			$result = $link->query($sql);
 			$row = $result->fetch_array();
 			
