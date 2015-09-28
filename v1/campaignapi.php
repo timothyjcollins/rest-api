@@ -504,6 +504,7 @@
 			}
 			$sql = rtrim($sql, ", ");
 			$sql .= "where story_id = " . $story_id;
+			echo $sql;
 			$link->query($sql);
 										
 			return '{"SUCCESS" : "YES"}';
