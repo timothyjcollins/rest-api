@@ -394,6 +394,48 @@
 				$json .= '"STORY_ID" : "' . $row["story_id"];
 				$json .= "[";
 				$json .= '"TITLE" : "' . $row["title"] . '",';
+				$json .= '"DESCRIPTION" : "' . substr($row["description"],0,250) . '",';
+				$json .= '"FIRST_NAME" : "' . $row["first_name"] . '",';
+				$json .= '"LAST_NAME" : "' . $row["last_name"] . '"';
+				$json .= "],";
+			}
+			$json = rtrim($json, ",");
+			$json .= "}";	
+		 	return $json;
+		}
+		protected function long_list_story(){
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
+			$count = $this->args["count"];
+			$sort = $this->args["sort"];
+			$camid = $this->args["camid"];
+			
+			$sql = "select * from innodb.Story where not deleted = 'YES' and isapproved = 'YES' and campaign_id = " . $camid . " ";
+			if($sort == "ALPHA_ASC"){
+				$order = "order by title asc ";
+			}
+			if($sort == "ALPHA_DESC"){
+				$order = "order by title desc ";
+			}
+			if($sort == "DATE_ASC"){
+				$order = "order by submitted_at asc ";
+			}
+			if($sort == "DATE_DESC"){
+				$order = "order by submited_at desc ";
+			}
+			if($sort == "LIKES_ASC"){
+				$order = "order by likes asc ";
+			}
+			if($sort == "LIKES_DESC"){
+				$order = "order by likes desc ";
+			}
+			$sql .= $order . " limit 0," . $count;
+			$result = $link->query($sql);
+			
+			$json = "{";
+			while($row = $result->fetch_array()){
+				$json .= '"STORY_ID" : "' . $row["story_id"];
+				$json .= "[";
+				$json .= '"TITLE" : "' . $row["title"] . '",';
 				$json .= '"DESCRIPTION" : "' . $row["description"] . '",';
 				$json .= '"FIRST_NAME" : "' . $row["first_name"] . '",';
 				$json .= '"LAST_NAME" : "' . $row["last_name"] . '"';
