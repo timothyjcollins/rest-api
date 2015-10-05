@@ -666,11 +666,12 @@
 				$json .= '"PUBLISHED_AT" : "' . $row["published_at"] . '",';
 				$json .= '"ISFLAGGED" : "' . $row["isflagged"] . '",';
 				$json .= '"LIKES" : "' . $row["likes"] . '",';
-				$json .= '"EMAIL" : "' . $row["email"] . '",';
-				$json .= "]";
+				$json .= '"EMAIL" : "' . $row["email"] . '"';
+				$json .= "],";
 			}
-			
+			$json = rtrim($json, ",");
 			$json .= "}";
+			return $json;
 		}
 	}
 ?>
