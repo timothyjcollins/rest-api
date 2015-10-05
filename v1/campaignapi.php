@@ -646,6 +646,7 @@
 			}
 			$sql = rtrim($sql, "or ");
 			$sql .= ")";
+			echo $sql;
 			
 			$json = "{";
 			
