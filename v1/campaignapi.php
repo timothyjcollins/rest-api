@@ -637,7 +637,7 @@
 			$size = $this->args["size"];
 			$camid = $this->args["camid"];
 			
-			$sql = "select * from innodb.Story where campaign_id = " . $camid . " and not deleted = 'YES' and isapproved = 'YES' ";
+			$sql = "select * from innodb.Story where campaign_id = " . $camid . " and not deleted = 'YES' and isapproved = 'YES' and ";
 			$keywords_arr = explode(",",$keywords);
 			$sql .= "(";
 			foreach($keywords_arr as $keyword){
@@ -646,7 +646,6 @@
 			}
 			$sql = rtrim($sql, "or ");
 			$sql .= ")";
-			echo $sql;
 			
 			$json = "{";
 			
