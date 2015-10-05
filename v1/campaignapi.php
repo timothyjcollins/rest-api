@@ -5,10 +5,11 @@
 	    protected $User;
 		protected $args;
 	
-	    public function __construct($request, $origin,$args) {
+	    public function __construct($request, $origin,$args,$request_method) {
 	    	parent::__construct($request);
 			// Abstracted out for example
 	        $this->User = "TEST";	
+			$this->request_method = $request_method;
 			$arg_arr = explode("&",$args);
 			$arg_array = Array();
 			foreach ($arg_arr as $arg_line) {
@@ -21,6 +22,9 @@
 			}
 		}
 		protected function submit_campaign(){
+			if($this->request_method != "POST"){
+				return '{"CAMPAIGN_ID" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$name = $this->args["name"];	
 			$desc = $this->args["desc"];
@@ -98,6 +102,10 @@
 			return '{"CAMPAIGN_ID" : "' . $camid . '"}';
 		}
 		protected function update_campaign(){
+			if($this->request_method != "POST"){
+				return '{"CAMPAIGN_ID" : "INCORRECT REQUEST METHOD"}';
+			}
+			
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$camid = $this->args["camid"];
 		 	$name = $this->args["name"];	
@@ -221,6 +229,9 @@
 			return '{"CAMPAIGN_ID" : "' . $camid . '"}';
 		}
 		protected function search_campaign(){
+			if($this->request_method != "GET"){
+				return '{"CAMPAIGN_ID" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$keywords = $this->args["keywords"];
 			$filter = $this->args["filter"];
@@ -252,6 +263,10 @@
 			return '{"CAMPAIGN_ID" : "' . $json . '"}';
 		}
 		protected function delete_campaign(){
+			if($this->request_method != "POST"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
+			
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$camid = $this->args["camid"];
 		 	$sql = "upadte innodb.Campaign set deleted = 'YES' where campaign_id = " . $camid;
@@ -259,6 +274,10 @@
 			return '{"SUCCESS" : "YES"}';
 		}
 		protected function newcategory(){
+			if($this->request_method != "POST"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
+			
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 		 	$name = $this->args["name"];
 			$sql = "insert into innodb.Category (category_text) values ('" . $name . "')";
@@ -267,6 +286,9 @@
 			return '{"SUCCESS" : "YES - ' . $cat_id . '"}';
 		}
 		protected function categories(){
+			if($this->request_method != "GET"){
+				return '{"INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$sql = "select category_text from innodb.Category";
 			$json = "{";
@@ -279,6 +301,9 @@
 		 	return $json;	
 		}
 		protected function submit_story(){
+			if($this->request_method != "POST"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$camid = $this->args["camid"];
 			$title = $this->args["title"];
@@ -362,6 +387,9 @@
 			return '{"SUCCESS" : "' . $story_id . '"}';
 		}
 		protected function summary_list_story(){
+			if($this->request_method != "GET"){
+				return '{"STORY_ID" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$count = $this->args["count"];
 			$sort = $this->args["sort"];
@@ -404,6 +432,9 @@
 		 	return $json;
 		}
 		protected function long_list_story(){
+			if($this->request_method != "GET"){
+				return '{"STORY_ID" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$count = $this->args["count"];
 			$sort = $this->args["sort"];
@@ -446,6 +477,9 @@
 		 	return $json;
 		}
 		protected function retrieve_story(){
+			if($this->request_method != "GET"){
+				return '{"STORY_ID" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$story_id = $this->args["story_id"];
 			
@@ -477,6 +511,9 @@
 		 	return $json;
 		}
 		protected function update_story(){
+			if($this->request_method != "POST"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$story_id = $this->args["story_id"];
 			$camid = $this->args["camid"];
@@ -556,6 +593,10 @@
 			return '{"SUCCESS" : "YES"}';
 		}
 		protected function delete_story(){
+			if($this->request_method != "POST"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
+			
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$story_id = $this->args["story_id"];
 			$sql = "update innodb.Story set deleted = 'YES' where story_id = " . $story_id;
@@ -563,6 +604,9 @@
 		 	return '{"SUCCESS" : "YES"}';	
 		}
 		protected function approve_story(){
+			if($this->request_method != "POST"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$story_id = $this->args["story_id"];
 			$sql = "update innodb.Story set isapproved = 'YES' where story_id = " . $story_id;
@@ -571,6 +615,9 @@
 			return '{"SUCCESS" : "YES"}';
 		}
 		protected function disapprove_story(){
+			if($this->request_method != "POST"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
 			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 			$story_id = $this->args["story_id"];
 			$sql = "update innodb.Story set isapproved = 'NO' where story_id = " . $story_id;
@@ -579,6 +626,51 @@
 			$story_id = $this->args["story_id"];
 			
 			return '{"SUCCESS" : "YES"}';
+		}
+		protected function search_story(){
+			if($this->request_method != "GET"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
+			$link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
+			$keywords = $this->args["keywords"];
+			$filter = $this->args["filter"];
+			$size = $this->args["size"];
+			$camid = $this->args["camid"];
+			
+			$sql = "select * from innodb.Story where campaign_id = " . $camid . " and not deleted = 'YES' and isapproved = 'YES' ";
+			$keywords_arr = explode(",",$keywords);
+			$sql .= "(";
+			foreach($keywords_arr as $keyword){
+				$sql .= " title like '%" . $keyword . "%' or ";
+				$sql .= " description like '%" . $keyword . "%' or ";
+			}
+			$sql = rtrim($sql, "or ");
+			$sql .= ")";
+			
+			$json = "{";
+			
+			$result = $link->query($sql);
+			while($row = $result->fetch_array()){
+				$json .= '"STORY_ID" : "' . $row["story_id"] . '" [';
+				$json .= '"TITLE" : "' . $row["title"] . '",';
+				$json .= '"DESCRIPTION" : "' . $row["description"] . '",';
+				$json .= '"FIRST_NAME" : "' . $row["first_name"] . '",';
+				$json .= '"LAST_NAME" : "' . $row["last_name"] . '",';
+				$json .= '"ADDRESS_1" : "' . $row["address_1"] . '",';
+				$json .= '"ADDRESS_2" : "' . $row["address_2"] . '",';
+				$json .= '"COUNTRY" : "' . $row["country_id"] . '",';
+				$json .= '"CITY" : "' . $row["city"] . '",';
+				$json .= '"OPTIN" : "' . $row["optin"] . '",';
+				$json .= '"STATE" : "' . $row["state_id"] . '",';
+				$json .= '"SUBMITTED_AT" : "' . $row["submitted_at"] . '",';
+				$json .= '"PUBLISHED_AT" : "' . $row["published_at"] . '",';
+				$json .= '"ISFLAGGED" : "' . $row["isflagged"] . '",';
+				$json .= '"LIKES" : "' . $row["likes"] . '",';
+				$json .= '"EMAIL" : "' . $row["email"] . '",';
+				$json .= "]";
+			}
+			
+			$json .= "}";
 		}
 	}
 ?>
