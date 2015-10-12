@@ -7,6 +7,7 @@
 	
 	try {
 	    $API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_SERVER["QUERY_STRING"],$_SERVER["REQUEST_METHOD"]);
+		echo $_SERVER["QUERY_STRING"];
 	    echo $API->processAPI();
 	} catch (Exception $e) {
 	    echo json_encode(Array('error' => $e->getMessage()));
