@@ -21,14 +21,7 @@
 				}
 				$this->args = $arg_array; 
 			}else{
-				print_r($args);
-				$arg_array = Array();
-				$ctr = 0;
-				foreach ($args as $arg_line) {
-					$arg_array[$ctr] = $arg_line;
-					$ctr = $ctr + 1;
-				}
-				$this->args = $arg_array; 
+				$this->args = $args; 
 			}   
 			if($this->args["apikey"] != "123456"){
 				throw new Exception('No or Bad API Key provided');
