@@ -12,7 +12,7 @@
 			$this->link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 	        $this->User = "TEST";	
 			$this->request_method = $request_method;
-			if($request_method == "POST"){
+			if($request_method == "GET"){
 				$arg_arr = explode("&",$args);
 				$arg_array = Array();
 				foreach ($arg_arr as $arg_line) {
