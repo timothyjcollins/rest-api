@@ -5,7 +5,7 @@
 	    $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
 	}
 	
-	echo $_SERVER["QUERY_STRING"];
+	echo "----" . $_SERVER["QUERY_STRING"] . "----";
 	try {
 	    $API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_SERVER["QUERY_STRING"],$_SERVER["REQUEST_METHOD"]);
 	    echo $API->processAPI();
