@@ -22,11 +22,11 @@
 				$this->args = $arg_array; 
 			}else{
 				print_r($args);
-				$arg_arr = $args;
 				$arg_array = Array();
-				foreach ($arg_arr as $arg_line) {
-					$arg_array[$arg_line[0]] = $arg_line[1];
-					echo $arg_line[0];
+				$ctr = 0;
+				foreach ($args as $arg_line) {
+					$arg_array[$ctr] = $arg_line;
+					$ctr = $ctr + 1;
 				}
 				$this->args = $arg_array; 
 			}   
