@@ -23,7 +23,6 @@
 			}else{
 				$this->args = $args; 
 			}   
-			print_r($this->args);
 			if($this->args["apikey"] != "123456"){
 				throw new Exception('No or Bad API Key provided');
 			}
