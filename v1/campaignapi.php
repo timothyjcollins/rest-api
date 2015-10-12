@@ -12,7 +12,8 @@
 			$this->link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 	        $this->User = "TEST";	
 			$this->request_method = $request_method;
-			$arg_arr = explode("&",$args);
+			//$arg_arr = explode("&",$args);
+			$arg_arr = $argv;
 			$arg_array = Array();
 			foreach ($arg_arr as $arg_line) {
 				$arg_line_elem = explode("=",$arg_line);
