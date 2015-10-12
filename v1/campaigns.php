@@ -7,7 +7,11 @@
 	
 	var_dump($_POST);
 	try {
-	    $API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_SERVER["QUERY_STRING"],$_SERVER["REQUEST_METHOD"]);
+		if($_SERVER["REQUEST_METHOD"] == "POST"){
+			$API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_POST,$_SERVER["REQUEST_METHOD"]);
+		}else{
+	    	$API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_GET,$_SERVER["REQUEST_METHOD"]);
+		}
 	    echo $API->processAPI();
 	} catch (Exception $e) {
 	    echo json_encode(Array('error' => $e->getMessage()));

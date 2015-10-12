@@ -13,7 +13,7 @@
 	        $this->User = "TEST";	
 			$this->request_method = $request_method;
 			//$arg_arr = explode("&",$args);
-			$arg_arr = $argv;
+			$arg_arr = $args;
 			$arg_array = Array();
 			foreach ($arg_arr as $arg_line) {
 				$arg_line_elem = explode("=",$arg_line);
