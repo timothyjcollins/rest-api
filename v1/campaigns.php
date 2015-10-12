@@ -5,7 +5,7 @@
 	    $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
 	}
 	
-	echo "----" . $_SERVER["argv"] . "----";
+	var_dump($_POST);
 	try {
 	    $API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_SERVER["QUERY_STRING"],$_SERVER["REQUEST_METHOD"]);
 	    echo $API->processAPI();
