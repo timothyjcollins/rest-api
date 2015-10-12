@@ -21,6 +21,7 @@
 				}
 				$this->args = $arg_array; 
 			}else{
+				print_r($args);
 				$arg_arr = $args;
 				$arg_array = Array();
 				foreach ($arg_arr as $arg_line) {
