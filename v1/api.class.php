@@ -82,8 +82,9 @@ abstract class api
     }
 
     private function _response($data, $status = 200) {
-        header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
-        return json_encode($data);
+        //header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
+        //return json_encode($data);
+        return $data;
     }
 
     private function _cleanInputs($data) {
