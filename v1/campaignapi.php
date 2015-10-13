@@ -744,19 +744,17 @@
 			
 			$result = $this->link->query($sql);
 			while($row = $result->fetch_array()){
-				$rss .= '<item>';
-				$rss .= '<title>' . $row["title"] . '</title>';
-				$rss .= '<link>' . $host . '</link>';
-				$rss .= '<description>';
-				$rss .= $row["description"];
-				$rss .= '</description>';
-				$rss .= '<pubDate>' . $row["published_at"] . '</pubDate>';
-				$rss .= '<guid>' . $host .'</guid>';
-				$rss .= '</item>';				
+				$rss .= '<item>\n';
+				$rss .= '<title>' . $row["title"] . '</title>\n';
+				$rss .= '<link>' . $host . '</link>\n';
+				$rss .= '<description>' . $row["description"] . '</description>\n';
+				$rss .= '<pubDate>' . $row["published_at"] . '</pubDate>\n';
+				$rss .= '<guid>' . $host .'</guid>\n';
+				$rss .= '</item>\n';				
 			}
 			
-			$rss .='</channel>';
-			$rss .= '</rss>';
+			$rss .='</channel>\n';
+			$rss .= '</rss>\n';
 			return $rss;
 		}
 	}
