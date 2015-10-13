@@ -740,6 +740,7 @@
 			
 			$rss .='</channel>';
 			$rss .= '</rss>';
+			return $rss;
 		}
 	}
 ?>
