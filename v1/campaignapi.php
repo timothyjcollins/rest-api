@@ -734,7 +734,7 @@
 				$rss .= '<description>' . $row["description"] . '</description>';
 				$rss .= '<pubDate>' . $row["published_at"] . '</pubDate>';
 				$rss .= '<guid>' . $host .'</guid>';
-				$rss .= '</item>';				
+				$rss .= '</item>';
 			}
 			
 			$rss .='</channel>';
