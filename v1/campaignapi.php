@@ -700,5 +700,46 @@
 			$json .= "}";
 			return $json;
 		}
+		protected function rss(){
+			if($this->request_method != "GET"){
+				return '{"SUCCESS" : "INCORRECT REQUEST METHOD"}';
+			}
+			$camid = $this->args["camid"];
+			$numtoreturn = $this->args["numtoreturn"];
+			$sort = $this->args["sort"];
+			$rss = "";
+			
+			$sql = "select * from innodb.Campaign where campaign_id = " . $camid;
+			$result = $this->link->query($sql);
+			$row = $result->fetch_array();
+			$rss .= '<rss version="2.0">';
+			$rss .= '<channel>';
+			$rss .= '<title>' . $row["name"] . '</title>';
+			$rss .= '<description>' . $row["description"] . '</description>';
+			$rss .= '<language>en-us</language>';
+			$rss .= '<pubDate>' . $row["start_date"] . '</pubDate>';
+			$rss .= '<lastBuildDate>' . $row["start_date"] . '</lastBuildDate>';
+			
+			$sql = "select * from innodb.Story where campaign_id = " . $camid; //***************************
+			$result = $this->link->query($sql);
+			while($row = $result->fetch_array()){
+				$rss .= '<item>';
+				$rss .= '<title>' . $row["title"] . '</title>';
+				$rss .= '<link>';
+				$rss .= 'http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp'; //***************************
+				$rss .= '</link>';
+				$rss .= '<description>';
+				$rss .= $row["description"];
+				$rss .= '</description>';
+				$rss .= '<pubDate>' . $row["published_at"] . '</pubDate>';
+				$rss .= '<guid>';
+				$rss .= 'http://liftoff.msfc.nasa.gov/2003/06/03.html#item573'; //***************************
+				$rss .= '</guid>';
+				$rss .= '</item>';				
+			}
+			
+			$rss .='</channel>';
+			$rss .= '</rss>';
+		}
 	}
 ?>
