@@ -707,6 +707,7 @@
 			$camid = $this->args["camid"];
 			$numtoreturn = $this->args["numtoreturn"];
 			$sort = $this->args["sort"];
+			$host = $this->args["host"];
 			$rss = "";
 			
 			$sql = "select * from innodb.Campaign where campaign_id = " . $camid;
@@ -720,21 +721,37 @@
 			$rss .= '<pubDate>' . $row["start_date"] . '</pubDate>';
 			$rss .= '<lastBuildDate>' . $row["start_date"] . '</lastBuildDate>';
 			
-			$sql = "select * from innodb.Story where campaign_id = " . $camid; //***************************
+			$sql = "select * from innodb.Story where campaign_id = " . $camid . " "; 
+			if($sort == "ALPHA_ASC"){
+				$order = "order by title asc ";
+			}
+			if($sort == "ALPHA_DESC"){
+				$order = "order by title desc ";
+			}
+			if($sort == "DATE_ASC"){
+				$order = "order by published_at asc ";
+			}
+			if($sort == "DATE_DESC"){
+				$order = "order by published_at desc ";
+			}
+			if($sort == "LIKES_ASC"){
+				$order = "order by likes asc ";
+			}
+			if($sort == "LIKES_DESC"){
+				$order = "order by likes desc ";
+			}
+			$sql .= $order . " limit 0," . $numtoreturn;
+			
 			$result = $this->link->query($sql);
 			while($row = $result->fetch_array()){
 				$rss .= '<item>';
 				$rss .= '<title>' . $row["title"] . '</title>';
-				$rss .= '<link>';
-				$rss .= 'http://liftoff.msfc.nasa.gov/news/2003/news-starcity.asp'; //***************************
-				$rss .= '</link>';
+				$rss .= '<link>' . $host . '</link>';
 				$rss .= '<description>';
 				$rss .= $row["description"];
 				$rss .= '</description>';
 				$rss .= '<pubDate>' . $row["published_at"] . '</pubDate>';
-				$rss .= '<guid>';
-				$rss .= 'http://liftoff.msfc.nasa.gov/2003/06/03.html#item573'; //***************************
-				$rss .= '</guid>';
+				$rss .= '<guid>' . $host .'</guid>';
 				$rss .= '</item>';				
 			}
 			
