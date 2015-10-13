@@ -697,6 +697,7 @@
 			$sql = "select * from innodb.Campaign where campaign_id = " . $camid;
 			$result = $this->link->query($sql);
 			$row = $result->fetch_array();
+			$rss .= '<?xml version="1.0"?>';
 			$rss .= '<rss version="2.0">';
 			$rss .= '<channel>';
 			$rss .= '<title>' . $row["name"] . '</title>';
