@@ -14,14 +14,9 @@
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
-				    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-				    if($check !== false) {
-				        $filename = $_FILES["fileToUpload"]["tmp_name"];
-				        $uploadOk = 1;
-				    } else {
-				        $filename = "____";
-				        $uploadOk = 0;
-				    }
+					move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+			        $filename = $target_file;
+			        $uploadOk = 1;
 				}
 			}
 			$API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_POST,$_SERVER["REQUEST_METHOD"],$filename);
