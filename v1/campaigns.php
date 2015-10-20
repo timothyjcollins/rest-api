@@ -16,6 +16,7 @@
 				if(isset($_POST["submit"])) {
 					require 'aws/aws-autoloader.php';
 					$s3 = new AmazonS3();
+					print_r($s3);
 					$bucket = 'userstoriesimages' . strtolower($s3->key);
 					$result = $s3->putObject(array('Bucket' => $bucket, 'Key' => $_FILES["fileToUpload"], 'SourceFile' => $_FILES["fileToUpload"], 'ACL' => 'public-read'));
 			        $filename = $target_file;
