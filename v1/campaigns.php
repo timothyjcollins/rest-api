@@ -14,8 +14,11 @@
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
-					//move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
-					initiate_multipart_upload ( 'userstoriesimages', $_FILES["fileToUpload"]["name"]);
+					$s3 = new AmazonS3();
+					$bucket = 'userstoriesimages' . strtolower($s3->key);
+					initiate_multipart_upload ( $bucket, $_FILES["fileToUpload"]["name"]);
+					$upload_id = (string) $response->body->UploadId;
+					var_dump($response->isOK());
 			        $filename = $target_file;
 			        $uploadOk = 1;
 				}
