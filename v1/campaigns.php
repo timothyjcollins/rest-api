@@ -9,6 +9,7 @@
 		$filename = "____";
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			if($_POST["request"] == "submit_story"){
+				echo "HERE";
 				$target_file = basename($_FILES["fileToUpload"]["name"]);
 				$uploadOk = 1;
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
