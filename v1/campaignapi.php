@@ -384,9 +384,8 @@
 			$sql .= "'" . $pub_at . "',";
 			$sql .= "'" . $flagged . "',";
 			$sql .= "'" . $likes . "')";
-		echo $sql;
 			$this->link->query($sql);
-			$story_id = mysqli_insert_id($link);
+			$story_id = mysqli_insert_id($this->link);
 			
 			if($video != ""){
 				$sql = "insert into innodb.Story_video (story_id,title,caption,link) values (";
