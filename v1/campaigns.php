@@ -39,6 +39,7 @@
 				);
 				$context  = stream_context_create($opts);
 				$result = file_get_contents('http://userstoriesimages.s3-website-us-west-2.amazonaws.com', false, $context);
+				print_r($result);
 			}
 			$API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_POST,$_SERVER["REQUEST_METHOD"],$filename);
 		}else{
