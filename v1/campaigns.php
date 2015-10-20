@@ -1,5 +1,6 @@
 <?php
 	require_once 'campaignapi.php';
+	require 'Aws/aws-autoloader.php';
 	// Requests from the same server don't have a HTTP_ORIGIN header
 	if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
 	    $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
@@ -13,8 +14,7 @@
 				$uploadOk = 1;
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
-				if(isset($_POST["submit"])) {
-					require 'aws/aws-autoloader.php';
+				if(isset($_POST["submit"])) {					
 					//$s3 = new AmazonS3();
 					//print_r($s3);
 					//$bucket = 'userstoriesimages' . strtolower($s3->key);
