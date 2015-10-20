@@ -350,7 +350,6 @@
 			if($this->filename != "____"){
 				$image = $this->filename;	
 			}
-			echo $image . "----";
 			if($video != ""){
 				$video_arr = explode("[",$video);
 				$video_arr2 = explode(",",$video_arr[1]);
@@ -401,6 +400,7 @@
 				$sql .= $story_id . ",";
 				$sql .= "'" . $image_caption . "',";
 				$sql .= "'" . $image_link . "')";
+				echo $sql;
 				$this->link->query($sql);
 			}
 			$sql = "insert into innodb.Story_text (story_id,content) values (";
