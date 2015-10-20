@@ -396,11 +396,11 @@
 				$this->link->query($sql);
 			}
 			if($image != ""){
-				$sql = "insert into innodb.Story_image (story_id,content) values (";
+				$image_link = $image;
+				$sql = "insert into innodb.Story_image (story_id,content,link) values (";
 				$sql .= $story_id . ",";
 				$sql .= "'" . $image_caption . "',";
 				$sql .= "'" . $image_link . "')";
-				echo $sql;
 				$this->link->query($sql);
 			}
 			$sql = "insert into innodb.Story_text (story_id,content) values (";
