@@ -384,6 +384,7 @@
 			$sql .= "'" . $pub_at . "',";
 			$sql .= "'" . $flagged . "',";
 			$sql .= "'" . $likes . "')";
+		echo $sql;
 			$this->link->query($sql);
 			$story_id = mysqli_insert_id($link);
 			
@@ -403,7 +404,6 @@
 				$sql .= $story_id . ",";
 				$sql .= "'" . $image_caption . "',";
 				$sql .= "'" . $image_link . "')";
-				echo $sql;
 				$this->link->query($sql);
 			}
 			$sql = "insert into innodb.Story_text (story_id,content) values (";
