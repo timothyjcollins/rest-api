@@ -6,10 +6,27 @@
 	}
 	
 	try {
+		$filename = "____";
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
-			$API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_POST,$_SERVER["REQUEST_METHOD"]);
+			if($_POST["request"] == "submit_story"){
+				$target_file = basename($_FILES["fileToUpload"]["name"]);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+				// Check if image file is a actual image or fake image
+				if(isset($_POST["submit"])) {
+				    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+				    if($check !== false) {
+				        $filename = $_FILES["fileToUpload"]["tmp_name"];
+				        $uploadOk = 1;
+				    } else {
+				        $filename = "____";
+				        $uploadOk = 0;
+				    }
+				}
+			}
+			$API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_POST,$_SERVER["REQUEST_METHOD"],$filename);
 		}else{
-	    	$API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_SERVER["QUERY_STRING"],$_SERVER["REQUEST_METHOD"]);
+	    	$API = new campaignapi($_REQUEST['request'], $_SERVER['HTTP_ORIGIN'],$_SERVER["QUERY_STRING"],$_SERVER["REQUEST_METHOD"],$filename);
 		}
 	    echo $API->processAPI();
 	} catch (Exception $e) {

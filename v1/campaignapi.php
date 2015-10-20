@@ -6,12 +6,13 @@
 		protected $args;
 		protected $link;
 	
-	    public function __construct($request, $origin,$args,$request_method) {
+	    public function __construct($request, $origin,$args,$request_method,$filename) {
 	    	parent::__construct($request);
 			// Abstracted out for example
 			$this->link = mysqli_connect("userstories.clltdiskvizr.us-west-2.rds.amazonaws.com", "tcollins", "enif1233", "innodb");
 	        $this->User = "TEST";	
 			$this->request_method = $request_method;
+			$this->filename = $filename;
 			if($request_method == "GET"){
 				$arg_arr = explode("&",$args);
 				$arg_array = Array();
@@ -392,6 +393,9 @@
 				$this->link->query($sql);
 			}
 			if($image != ""){
+				if($this->filename != "____"){
+					$image_link = $this->filename;	
+				}
 				$sql = "insert into innodb.Story_image (story_id,content) values (";
 				$sql .= $story_id . ",";
 				$sql .= "'" . $image_caption . "',";
