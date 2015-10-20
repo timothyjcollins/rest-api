@@ -24,8 +24,8 @@
 				        'AWSAccessKeyId' => 'AKIAIBW6LGSGPSKAUWGQ',
 				        'acl' => 'private',
 				        'success_action_redirect' => 'http://localhost/',
-				        'policy' => '{"expiration": "2009-01-01T00:00:00Z",  "conditions": [   {"bucket": "s3-bucket"},    ["starts-with", "$key", "uploads/"],   {"acl": "private"},  {"success_action_redirect": "http://localhost/"},   ["starts-with", "$Content-Type", ""],   ["content-length-range", 0, 1048576] ]}',
-				        'signature' => 'BkTC4k7XnfYZ91UtE9Z998XbbKA=',
+				        'policy' => '{"expiration": "2020-01-01T00:00:00Z",  "conditions": [   {"bucket": "s3-bucket"},    ["starts-with", "$key", "uploads/"],   {"acl": "private"},  {"success_action_redirect": "http://localhost/"},   ["starts-with", "$Content-Type", ""],   ["content-length-range", 0, 1048576] ]}',
+				        'signature' => 'AVTji+RBdhrzsQOVLhbV+0wYs4w=',
 				        'Content-Type' => 'image/jpeg',
 				        'file' => $_FILES["fileToUpload"]
 				    )
