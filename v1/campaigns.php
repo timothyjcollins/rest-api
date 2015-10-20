@@ -14,11 +14,10 @@
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
+					require 'aws/aws-autoloader.php';
 					$s3 = new AmazonS3();
 					$bucket = 'userstoriesimages' . strtolower($s3->key);
-					initiate_multipart_upload ( $bucket, $_FILES["fileToUpload"]["name"]);
-					$upload_id = (string) $response->body->UploadId;
-					var_dump($response->isOK());
+					$result = $this -> s3Client -> putObject(array('Bucket' => $bucket, 'Key' => $_FILES["fileToUpload"], 'SourceFile' => $_FILES["fileToUpload"], 'ACL' => 'public-read'));
 			        $filename = $target_file;
 			        $uploadOk = 1;
 				}
