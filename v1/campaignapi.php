@@ -347,6 +347,9 @@
 			$nameshown = $this->args["nameshown"];
 			$capturing = $this->args["capturing"];
 			$likes = $this->args["likes"];
+			if($this->filename != "____"){
+				$image = $this->filename;	
+			}
 			if($video != ""){
 				$video_arr = explode("[",$video);
 				$video_arr2 = explode(",",$video_arr[1]);
