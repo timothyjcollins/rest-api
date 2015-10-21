@@ -15,9 +15,7 @@
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {					
-$client = S3Client::factory(array(
-    'profile' => 'tcollins'
-));
+$client = S3Client::factory();
 $client->putObject(array(
     'Bucket' => 'userstoriesimages',
     'Key'    => $_FILES["fileToUpload"]["name"],
