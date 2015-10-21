@@ -16,7 +16,7 @@
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {					
 $client = S3Client::factory(array(
-    'profile' => '<profile in your aws credentials file>'
+    'profile' => 'tcollins'
 ));
 $client->putObject(array(
     'Bucket' => 'userstoriesimages',
