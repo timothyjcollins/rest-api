@@ -509,10 +509,10 @@ spl_autoload_register(function ($class) use ($mapping) {
     }
 }, true);
 
-require 'Aws/functions.php';
-require 'GuzzleHttp/functions.php';
-require 'GuzzleHttp/Psr7/functions.php';
-require 'GuzzleHttp/Promise/functions.php';
-require 'JmesPath/JmesPath.php';
+require '/v1/aws/Aws/functions.php';
+require '/v1/aws/GuzzleHttp/functions.php';
+require '/v1/aws/GuzzleHttp/Psr7/functions.php';
+require '/v1/aws/GuzzleHttp/Promise/functions.php';
+require '/v1/aws/JmesPath/JmesPath.php';
 
 echo "HERE";
