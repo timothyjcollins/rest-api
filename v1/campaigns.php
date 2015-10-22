@@ -1,6 +1,6 @@
 <?php
 	require_once 'campaignapi.php';
-	use Aws\S3\S3Client;
+	require_once 'aws/aws-autoloader.php';
 	// Requests from the same server don't have a HTTP_ORIGIN header
 	if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
 	    $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
@@ -14,7 +14,12 @@
 				$uploadOk = 1;
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
-				if(isset($_POST["submit"])) {					
+				if(isset($_POST["submit"])) {
+$sharedConfig = [
+    'region'  => 'us-west-2',
+    'version' => 'latest'
+];
+$sdk = new Aws\Sdk($sharedConfig);					
 $s3Client = $sdk->createS3();
 $result = $s3Client->putObject([
     'Bucket' => 'userstoriesimages',
