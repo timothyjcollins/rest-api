@@ -508,11 +508,16 @@ spl_autoload_register(function ($class) use ($mapping) {
         require $mapping[$class];
     }
 }, true);
+echo "HERE";
 
 require '/v1/aws/Aws/functions.php';
+echo "HERE";
 require '/v1/aws/GuzzleHttp/functions.php';
+echo "HERE";
 require '/v1/aws/GuzzleHttp/Psr7/functions.php';
+echo "HERE";
 require '/v1/aws/GuzzleHttp/Promise/functions.php';
+echo "HERE";
 require '/v1/aws/JmesPath/JmesPath.php';
 
 echo "HERE";
