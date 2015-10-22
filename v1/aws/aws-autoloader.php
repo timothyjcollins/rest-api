@@ -1,5 +1,4 @@
 <?php
-echo "HERE";
 $mapping = array(
     'Aws\Api\AbstractModel' => __DIR__ . '/Aws/Api/AbstractModel.php',
     'Aws\Api\ApiProvider' => __DIR__ . '/Aws/Api/ApiProvider.php',
@@ -515,3 +514,5 @@ require __DIR__ . '/GuzzleHttp/functions.php';
 require __DIR__ . '/GuzzleHttp/Psr7/functions.php';
 require __DIR__ . '/GuzzleHttp/Promise/functions.php';
 require __DIR__ . '/JmesPath/JmesPath.php';
+
+echo "HERE";
