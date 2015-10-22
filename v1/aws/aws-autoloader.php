@@ -508,11 +508,9 @@ spl_autoload_register(function ($class) use ($mapping) {
         require $mapping[$class];
     }
 }, true);
-
+echo __DIR__;
 require __DIR__ . '/Aws/functions.php';
 require __DIR__ . '/GuzzleHttp/functions.php';
 require __DIR__ . '/GuzzleHttp/Psr7/functions.php';
 require __DIR__ . '/GuzzleHttp/Promise/functions.php';
 require __DIR__ . '/JmesPath/JmesPath.php';
-
-echo "HERE";
