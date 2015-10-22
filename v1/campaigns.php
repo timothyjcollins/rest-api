@@ -1,6 +1,6 @@
 <?php
 	require_once 'campaignapi.php';
-require '/v1/aws/aws-autoloader.php';
+require 'vendor/autoload.php';
 	// Requests from the same server don't have a HTTP_ORIGIN header
 	if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
 	    $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
