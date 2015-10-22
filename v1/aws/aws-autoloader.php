@@ -1,5 +1,5 @@
 <?php
-
+echo "HERE";
 $mapping = array(
     'Aws\Api\AbstractModel' => __DIR__ . '/Aws/Api/AbstractModel.php',
     'Aws\Api\ApiProvider' => __DIR__ . '/Aws/Api/ApiProvider.php',
