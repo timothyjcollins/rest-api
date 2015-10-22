@@ -15,12 +15,12 @@
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {					
-$client = S3Client::factory();
-$client->putObject(array(
+$s3Client = $sdk->createS3();
+$result = $s3Client->putObject([
     'Bucket' => 'userstoriesimages',
-    'Key'    => $_FILES["fileToUpload"]["name"],
+    'Key'    => 'console.aws.amazon.com/s3/home?region=us-west-2',
     'Body'   => $_FILES["fileToUpload"]
-));
+]);
 			        $filename = $target_file;
 			        $uploadOk = 1;
 				}
