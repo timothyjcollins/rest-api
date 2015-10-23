@@ -16,12 +16,12 @@ require '/home/ubuntu/vendor/autoload.php';
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
 echo "HERE1";
-//$sharedConfig = [
-//    'region'  => 'us-west-2',
-//    'version' => 'latest'
-//];
+$sharedConfig = [
+    'region'  => 'us-west-2',
+    'version' => 'latest'
+];
 echo "HERE";
-//$sdk = new Aws\Sdk($sharedConfig);
+$sdk = new Aws\Sdk($sharedConfig);
 //$s3Client = $sdk->createS3();
 			        $filename = $target_file;
 			        $uploadOk = 1;
