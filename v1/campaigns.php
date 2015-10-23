@@ -15,12 +15,10 @@ require '/home/ubuntu/vendor/autoload.php';
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
-echo "HERE1";
 $sharedConfig = [
     'region'  => 'us-west-2',
     'version' => 'latest'
 ];
-echo "HERE";
 $sdk = new Aws\Sdk($sharedConfig);
 $s3Client = $sdk->createS3();
 $result = $s3Client->putObject([
@@ -28,6 +26,7 @@ $result = $s3Client->putObject([
     'Key'    => 'arn:aws:iam::029297227606:user/timothyc',
     'Body'   => $_FILES["fileToUpload"]["name"]
 ]);
+echo $_FILES["fileToUpload"]["name"];
 			        $filename = $target_file;
 			        $uploadOk = 1;
 				}
