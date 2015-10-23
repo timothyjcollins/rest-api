@@ -1,7 +1,6 @@
 <?php
 	require_once 'campaignapi.php';
-//require 'vendor/autoload.php';
-echo getenv();
+require 'vendor/autoload.php';
 	// Requests from the same server don't have a HTTP_ORIGIN header
 	if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
 	    $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
@@ -16,6 +15,11 @@ echo getenv();
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
+$sharedConfig = [
+    'region'  => 'us-west-2',
+    'version' => 'latest'
+];
+$sdk = new Aws\Sdk($sharedConfig);
 //$s3Client = $sdk->createS3();
 			        $filename = $target_file;
 			        $uploadOk = 1;
