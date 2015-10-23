@@ -21,7 +21,7 @@ $sharedConfig = [
     'version' => 'latest'
 ];
 echo "HERE";
-$sdk = new Aws\Sdk($sharedConfig);
+//$sdk = new Aws\Sdk($sharedConfig);
 //$s3Client = $sdk->createS3();
 			        $filename = $target_file;
 			        $uploadOk = 1;
