@@ -23,7 +23,7 @@ $sdk = new Aws\Sdk($sharedConfig);
 $s3Client = $sdk->createS3();
 $result = $s3Client->putObject([
     'Bucket' => 'userstoriesimages',
-    'Key'    => 'arn:aws:iam::029297227606:user/timothyc',
+    'Key'    => 'upload',
     'Body'   => $_FILES["fileToUpload"]["name"]
 ]);
 echo $_FILES["fileToUpload"]["name"];
