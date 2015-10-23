@@ -19,8 +19,8 @@ $sharedConfig = [
     'region'  => 'us-west-2',
     'version' => 'latest'
 ];
-$sdk = new Aws\Sdk($sharedConfig);					
-$s3Client = $sdk->createS3();
+//$sdk = new Aws\Sdk($sharedConfig);					
+//$s3Client = $sdk->createS3();
 //$result = $s3Client->putObject([
 //    'Bucket' => 'userstoriesimages',
 //    'Key'    => 'console.aws.amazon.com/s3/home?region=us-west-2',
