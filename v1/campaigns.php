@@ -15,6 +15,7 @@ require 'vendor/autoload.php';
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
+echo "HERE1";
 $sharedConfig = [
     'region'  => 'us-west-2',
     'version' => 'latest'
