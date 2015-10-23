@@ -511,14 +511,17 @@
 			
 			$sql = "select * from innodb.Story_image where story_id = " . $story_id;
 			$result2 = $this->link->query($sql);
-			$row2 = $result2->fetch_array();
 			
 			$json = "{";
 			$json .= '"STORY_ID" : "' . $row["story_id"] . ', ';
 			$json .= '"VALUES" : [';
 			$json .= '"TITLE" : "' . $row["title"] . '",';
 			$json .= '"DESCRIPTION" : "' . $row["description"] . '",';
-			$json .= '"IMAGE" : "' . $row2["link"] . '",';
+			$ctr = 1;
+			while($row2 = $result2->fetch_array()){
+				$json .= '"IMAGE' . $ctr . '" : "' . $row2["link"] . '",';
+				$ctr = $ctr + 1;
+			}
 			$json .= '"FIRST_NAME" : "' . $row["first_name"] . '",';
 			$json .= '"LAST_NAME" : "' . $row["last_name"] . '",';
 			$json .= '"ADDRESS_1" : "' . $row["address_1"] . '",';
