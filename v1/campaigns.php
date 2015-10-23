@@ -1,6 +1,6 @@
 <?php
 	require_once 'campaignapi.php';
-require '/home/ubuntu/vendor/autoload.php';
+	require '/home/ubuntu/vendor/autoload.php';
 	// Requests from the same server don't have a HTTP_ORIGIN header
 	if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
 	    $_SERVER['HTTP_ORIGIN'] = $_SERVER['SERVER_NAME'];
@@ -15,18 +15,19 @@ require '/home/ubuntu/vendor/autoload.php';
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
-$sharedConfig = [
-    'region'  => 'us-west-2',
-    'version' => 'latest'
-];
-$sdk = new Aws\Sdk($sharedConfig);
-$s3Client = $sdk->createS3();
-$result = $s3Client->putObject([
-    'Bucket' => 'userstoriesimages',
-    'Key'    => $_FILES["fileToUpload"]["name"],
-    'SourceFile'   => $_FILES["fileToUpload"]["tmp_name"],
-    'ContentType' => 'image/jpeg'
-]);
+					$sharedConfig = [
+					    'region'  => 'us-west-2',
+					    'version' => 'latest'
+					];
+					$sdk = new Aws\Sdk($sharedConfig);
+					$s3Client = $sdk->createS3();
+					$result = $s3Client->putObject([
+					    'Bucket' => 'userstoriesimages',
+					    'Key'    => $_FILES["fileToUpload"]["name"],
+					    'SourceFile'   => $_FILES["fileToUpload"]["tmp_name"],
+					    'ContentType' => 'image/jpeg',
+					    'ACL' => 'public-read'
+					]);
 			        $filename = 'http://userstoriesimages.s3.amazonaws.com/' . $target_file;
 			        $uploadOk = 1;
 				}
