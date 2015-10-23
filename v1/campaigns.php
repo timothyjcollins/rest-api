@@ -26,8 +26,7 @@ $result = $s3Client->putObject([
     'Key'    => $_FILES["fileToUpload"]["name"],
     'Body'   => $_FILES["fileToUpload"]["tmp_name"]
 ]);
-echo $_FILES["fileToUpload"]["name"];
-			        $filename = $target_file;
+			        $filename = 'http://userstoriesimages.s3.amazonaws.com/' . $target_file;
 			        $uploadOk = 1;
 				}
 			}
