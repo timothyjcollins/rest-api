@@ -15,7 +15,13 @@ require 'vendor/autoload.php';
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
-$s3 = new Aws\S3\S3Client();
+$sdk = new Aws\Sdk([
+    'region'   => 'us-west-2',
+    'version'  => 'latest',
+    'DynamoDb' => [
+        'region' => 'eu-central-1'
+    ]
+]);
 //$sdk = new Aws\Sdk($sharedConfig);					
 //$s3Client = $sdk->createS3();
 //$result = $s3Client->putObject([
