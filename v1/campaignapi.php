@@ -509,11 +509,16 @@
 			$result = $this->link->query($sql);
 			$row = $result->fetch_array();
 			
+			$sql = "select * from innodb.Story_image where story_id = " . $story_id;
+			$result2 = $this->link->query($sql);
+			$row2 = $result->fetch_query($result2);
+			
 			$json = "{";
 			$json .= '"STORY_ID" : "' . $row["story_id"] . ', ';
 			$json .= '"VALUES" : [';
 			$json .= '"TITLE" : "' . $row["title"] . '",';
 			$json .= '"DESCRIPTION" : "' . $row["description"] . '",';
+			$json .= '"IMAGE" : "' . $row2["link"] . '",';
 			$json .= '"FIRST_NAME" : "' . $row["first_name"] . '",';
 			$json .= '"LAST_NAME" : "' . $row["last_name"] . '",';
 			$json .= '"ADDRESS_1" : "' . $row["address_1"] . '",';
