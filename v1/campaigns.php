@@ -19,6 +19,7 @@ $sharedConfig = [
     'region'  => 'us-west-2',
     'version' => 'latest'
 ];
+echo "HERE";
 $sdk = new Aws\Sdk($sharedConfig);
 //$s3Client = $sdk->createS3();
 			        $filename = $target_file;
