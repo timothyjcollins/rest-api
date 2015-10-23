@@ -1,6 +1,6 @@
 <?php
 	require_once 'campaignapi.php';
-require 'vendor/autoload.php';
+//require 'vendor/autoload.php';
 echo getenv();
 	// Requests from the same server don't have a HTTP_ORIGIN header
 	if (!array_key_exists('HTTP_ORIGIN', $_SERVER)) {
@@ -16,14 +16,7 @@ echo getenv();
 				$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 				// Check if image file is a actual image or fake image
 				if(isset($_POST["submit"])) {
-$s3Client = $sdk->createS3();
-//$sdk = new Aws\Sdk($sharedConfig);					
 //$s3Client = $sdk->createS3();
-//$result = $s3Client->putObject([
-//    'Bucket' => 'userstoriesimages',
-//    'Key'    => 'console.aws.amazon.com/s3/home?region=us-west-2',
-//    'Body'   => $_FILES["fileToUpload"]
-//]);
 			        $filename = $target_file;
 			        $uploadOk = 1;
 				}
