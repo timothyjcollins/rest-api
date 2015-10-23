@@ -22,7 +22,12 @@ $sharedConfig = [
 ];
 echo "HERE";
 $sdk = new Aws\Sdk($sharedConfig);
-//$s3Client = $sdk->createS3();
+$s3Client = $sdk->createS3();
+$result = $s3Client->putObject([
+    'Bucket' => 'userstoriesimages',
+    'Key'    => 'arn:aws:iam::029297227606:user/timothyc',
+    'Body'   => $_FILES["fileToUpload"]
+]);
 			        $filename = $target_file;
 			        $uploadOk = 1;
 				}
