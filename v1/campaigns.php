@@ -25,7 +25,8 @@
 					    'Bucket' => 'userstoriesimages',
 					    'Key'    => $_FILES["fileToUpload"]["name"],
 					    'SourceFile'   => $_FILES["fileToUpload"]["tmp_name"],
-					    'ContentType' => 'image/jpeg'
+					    'ContentType' => 'image/jpeg',
+					    'ACL' => 'public-read'
 					]);
 			        $filename = 'http://userstoriesimages.s3.amazonaws.com/' . $target_file;
 			        $uploadOk = 1;
