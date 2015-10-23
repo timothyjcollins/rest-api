@@ -511,7 +511,7 @@
 			
 			$sql = "select * from innodb.Story_image where story_id = " . $story_id;
 			$result2 = $this->link->query($sql);
-			$row2 = $result2->fetch_query();
+			$row2 = $result2->fetch_array();
 			
 			$json = "{";
 			$json .= '"STORY_ID" : "' . $row["story_id"] . ', ';
