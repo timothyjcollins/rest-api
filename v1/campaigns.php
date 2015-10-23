@@ -19,7 +19,7 @@ $sharedConfig = [
     'region'  => 'us-west-2',
     'version' => 'latest'
 ];
-$sdk = new Aws\Sdk($sharedConfig);					
+//$sdk = new Aws\Sdk($sharedConfig);					
 //$s3Client = $sdk->createS3();
 //$result = $s3Client->putObject([
 //    'Bucket' => 'userstoriesimages',
