@@ -25,7 +25,7 @@ $result = $s3Client->putObject([
     'Bucket' => 'userstoriesimages',
     'Key'    => $_FILES["fileToUpload"]["name"],
     'Body'   => $_FILES["fileToUpload"]["tmp_name"],
-    'content-type' => 'image/jpeg'
+    'Content-Type' => 'image/jpeg'
 ]);
 			        $filename = 'http://userstoriesimages.s3.amazonaws.com/' . $target_file;
 			        $uploadOk = 1;
