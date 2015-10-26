@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule /v1/retrieve_story(.*) http://${HTTP_HOST}/v1/campaigns.php$1
+RewriteRule /v1/retrieve_story(.*) http://%{HTTP_HOST}/v1/campaigns.php$1
